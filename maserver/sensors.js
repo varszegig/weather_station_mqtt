@@ -560,3 +560,25 @@ Sensor_ID12.prototype.debugString = function() {
   + ' 7d: ' + this.humidityAsString(this.json.out.averangehumidity["7d"])
   + ' 30d: ' + this.humidityAsString(this.json.out.averangehumidity["30d"]);
 }
+
+// ID0e: Temperature/Humidity sensor
+function Sensor_ID0e() {}
+util.inherits(Sensor_ID0e, SensorBase);
+Sensor_ID0e.prototype.bufferSize = function() {
+  return 8;
+}
+Sensor_ID0e.prototype.transmitInterval = function() {
+  return 7;
+}
+Sensor_ID0e.prototype.generateJSON = function(buffer) {
+  return { 'temperature': [
+                          this.convertTemperature(buffer.readUInt16BE(0))
+                        , this.convertTemperature(buffer.readUInt16BE(4))],
+       'humidity': [   this.convertHumidity(buffer.readUInt16BE(2))
+                     , this.convertHumidity(buffer.readUInt16BE(6))] };
+}
+Sensor_ID0e.prototype.debugString = function() {
+  return this.temperaturAsString(this.json.temperature[0])
+                    + ' ' + this.humidityAsString(this.json.humidity[0])
+}
+
