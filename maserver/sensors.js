@@ -493,7 +493,7 @@ Sensor_ID0b.prototype.getTXAndBufferOffset = function() {
 
 Sensor_ID0b.prototype.getBatteryLevel = function() {
   //  if(this.buffer.readUInt32BE(12)>>23 ==0){
-  if(this.buffer.readUInt32BE(12)>>15 ==0){
+  if(this.buffer.readUInt32BE(12)>>31 ==0){
     this.batteryOk = true 
   }else{
     this.batteryOk = false
