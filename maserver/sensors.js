@@ -640,7 +640,7 @@ Sensor_ID18.prototype.generateJSON = function(buffer) {
        'humidity': [ this.convertHumidity(buffer.readUInt8BE(5))],
        'airpressure': [ this.convertAirquality(buffer.readUInt16BE(6))] }
 }
-Sensor_ID05.prototype.debugString = function() {
+Sensor_ID18.prototype.debugString = function() {
   return this.temperaturAsString(this.json.temperature[0]) + ' ' +
          this.humidityAsString(this.json.humidity[0]) + ' ' +
          this.airqualityAsString(this.json.airpressure[0]) + ' ' + statusStr
