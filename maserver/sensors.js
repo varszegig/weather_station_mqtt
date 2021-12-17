@@ -613,6 +613,8 @@ Sensor_ID0e.prototype.convertHumidity = function(value) {
 }
 
 // ID18: air pressure monitor (MA10238)
+function Sensor_ID18() {}
+util.inherits(Sensor_ID18, SensorBase);
 Sensor_ID18.prototype.bufferSize = function() {
   return 4;
 }
