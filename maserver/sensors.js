@@ -611,3 +611,37 @@ Sensor_ID0e.prototype.convertHumidity = function(value) {
   // values: 0.0%…100.0%
   return this.round((value & 0x7ff) * 0.1, 1);
 }
+
+// ID18: air pressure monitor (MA10238)
+Sensor_ID18.prototype.bufferSize = function() {
+  return 4;
+}
+Sensor_ID18.prototype.transmitInterval = function() {
+  return 7;
+}
+Sensor_ID18.prototype.getTXAndBufferOffset = function() {
+  // The 18 sensor has a 3 byte tx value
+  this.tx = this.buffer.readUInt32BE(12) >> 8;
+  this.bufferOffset = 15;
+};
+
+Sensor_ID18.prototype.getBatteryLevel = function() {
+  //  if(this.buffer.readUInt32BE(12)>>23 ==0){
+  if(this.buffer.readUInt32BE(12)>>31 ==0){
+    this.batteryOk = true 
+  }else{
+    this.batteryOk = false
+  }
+};
+
+Sensor_ID18.prototype.generateJSON = function(buffer) {
+  return {
+       'temperature': [ this.convertTemperature(buffer.readUInt16BE(3))],
+       'humidity': [ this.convertHumidity(buffer.readUInt8BE(5))],
+       'airpressure': [ this.convertAirquality(buffer.readUInt16BE(6))] }
+}
+Sensor_ID05.prototype.debugString = function() {
+  return this.temperaturAsString(this.json.temperature[0]) + ' ' +
+         this.humidityAsString(this.json.humidity[0]) + ' ' +
+         this.airqualityAsString(this.json.airpressure[0]) + ' ' + statusStr
+}
