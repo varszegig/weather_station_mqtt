@@ -639,7 +639,7 @@ Sensor_ID18.prototype.getBatteryLevel = function() {
 Sensor_ID18.prototype.generateJSON = function(buffer) {
   return {
        'temperature': [ this.convertTemperature(buffer.readUInt16BE(3))],
-       'humidity': [ this.convertHumidity(buffer.readUInt8BE(5))],
+       'humidity': [ this.convertHumidity(buffer.readUInt8(5))],
        'airpressure': [ this.convertAirquality(buffer.readUInt16BE(6))] }
 }
 Sensor_ID18.prototype.debugString = function() {
