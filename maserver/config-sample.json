@@ -6,7 +6,7 @@
   "logfile": "./MobileAlerts.log",
   "logGatewayInfo": true,
 
-  "proxyServerPort": 8080,
+  "proxyServerPort": 8180,
 
   "mobileAlertsCloudForward": false,
 

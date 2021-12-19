@@ -129,5 +129,6 @@ module.exports = function(localIPv4Adress,proxyServerPort
   });
 
   app.listen(proxyServerPort, null, function() { });
+  console.log(`app listening on ${proxyServerPort}`)
   return app;
 };

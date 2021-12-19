@@ -106,6 +106,10 @@ SensorBase.prototype.convertTemperature = function(value) {
   return this.round((value & 0x7ff) * 0.1, 1);
 }
 
+SensorBase.prototype.convertAirPressure = function(value) {
+  return this.round(value * 0.1, 1);
+}
+
 SensorBase.prototype.temperaturAsString = function(temp) {
   var tempStr = temp;
   // illegal sensor value
@@ -638,9 +642,9 @@ Sensor_ID18.prototype.getBatteryLevel = function() {
 
 Sensor_ID18.prototype.generateJSON = function(buffer) {
   return {
-       'temperature': [ this.convertTemperature(buffer.readUInt16BE(3))],
-       'humidity': [ this.convertHumidity(buffer.readUInt8(5))],
-       'airpressure': [ this.convertAirquality(buffer.readUInt16BE(6))] }
+       'temperature': [ this.convertTemperature(buffer.readUInt16BE(0))],
+       'humidity': [ this.convertHumidity(buffer.readUInt8(2))],
+       'airpressure': [ this.convertAirPressure(buffer.readUInt16BE(3))] }
 }
 Sensor_ID18.prototype.debugString = function() {
   return this.temperaturAsString(this.json.temperature[0]) + ' ' +
